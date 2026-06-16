@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow — Preview + Publicação</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #f5f5f5; color: #1a1a1a; padding: 40px 20px; }
+  .page { max-width: 720px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 52px 56px; box-shadow: 0 4px 32px rgba(0,0,0,.08); }
+  h1 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 40px; }
+  h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-bottom: 16px; }
+  .section { margin-bottom: 40px; }
+  .step { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 14px; }
+  .num { min-width: 28px; height: 28px; border-radius: 50%; background: #1a1a1a; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-content { font-size: 15px; line-height: 1.6; }
+  .step-content b { font-weight: 600; }
+  .step-content code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: monospace; }
+  .box { background: #f8f8f8; border-left: 3px solid #1a1a1a; border-radius: 0 8px 8px 0; padding: 16px 20px; margin-bottom: 14px; font-size: 14.5px; line-height: 1.7; }
+  .box.green { border-color: #2e7d32; background: #f1f8f1; }
+  .box.blue { border-color: #1565c0; background: #f0f4ff; }
+  .box.orange { border-color: #e65100; background: #fff8f0; }
+  .divider { border: none; border-top: 1px solid #eee; margin: 36px 0; }
+  .tag { display: inline-block; background: #1a1a1a; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; letter-spacing: .5px; margin-bottom: 10px; }
+  .tag.green { background: #2e7d32; }
+  .tag.blue { background: #1565c0; }
+  .footer { font-size: 12px; color: #aaa; text-align: center; margin-top: 48px; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; border-radius: 0; padding: 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Workflow — Preview + Publicação</h1>
+  <p class="subtitle">Como visualizar alterações antes de publicar no site oficial</p>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>Ferramentas utilizadas</h2>
+    <div class="box blue">
+      <b>GitHub Pages</b> — site oficial, o que o público vê. Só atualiza quando você manda subir no <code>main</code>.
+    </div>
+    <div class="box green">
+      <b>Netlify</b> — usado apenas para prévia. Gera uma URL temporária para você visualizar qualquer alteração antes de publicar. Não publica no site oficial (está bloqueado).
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>Flow completo — passo a passo</h2>
+
+    <div class="step">
+      <div class="num">1</div>
+      <div class="step-content">
+        <b>Peça a alteração</b><br>
+        Fale o que quer mudar. Ex: "mude o preço para R$ 47,50".
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div class="step-content">
+        <b>Um branch de preview é criado</b><br>
+        A alteração vai para um branch separado (ex: <code>preview-preco-4750</code>), não para o <code>main</code>. O site oficial continua intacto.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div class="step-content">
+        <b>Netlify gera a URL de preview</b><br>
+        Em ~30 segundos aparece um novo deploy na aba <b>Deploys</b> do Netlify. Clique nele para abrir a URL e visualizar como ficou.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4A</div>
+      <div class="step-content">
+        <b>Gostou?</b> → Fale "sobe no main"<br>
+        A alteração vai para o <code>main</code> e o GitHub Pages atualiza o site em ~1 minuto.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4B</div>
+      <div class="step-content">
+        <b>Não gostou?</b> → Fale "descarta"<br>
+        O branch é removido e o site oficial continua sem nenhuma alteração.
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>Configuração do Netlify (feita uma vez por projeto)</h2>
+
+    <div class="step">
+      <div class="num">1</div>
+      <div class="step-content">Conecte o repositório GitHub ao Netlify.</div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="step-content">
+        Vá em <b>Project configuration → Continuous deployment → Branches and deploy contexts → Configure</b><br>
+        Mude <b>Branch deploys</b> para <code>All</code>.
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="step-content">
+        Na página <b>Deploys</b>, clique em <b>"Lock to stop auto publishing"</b>.<br>
+        Isso impede que o Netlify publique o site no <code>main</code> — ele vira só ferramenta de preview.
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>Resumo rápido</h2>
+    <div class="box">
+      Quer testar → pede o branch → vê no Netlify → gostou → sobe no main → GitHub Pages atualiza.
+    </div>
+    <div class="box orange">
+      <b>Nunca precisa fazer nada manualmente</b> além de aprovar ou descartar a alteração.
+    </div>
+  </div>
+
+  <p class="footer">Gerado para o projeto metodocorpo-livre</p>
+
+</div>
+</body>
+</html>
